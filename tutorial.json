@@ -1,0 +1,168 @@
+
+{
+  "origin": "68f60762f8373b6f3f33828acf2732e0",
+  "innernodes": {},
+  "nodes": {
+    "3ad8ad9e-d170-467d-b129-f82d85e1b639": {
+      "_id": "3ad8ad9e-d170-467d-b129-f82d85e1b639",
+      "properties": {
+        "postalAddress": "address"
+      },
+      "_type": {
+        "_id": "GetProfilePropertyNode",
+        "name": "Get Profile Property",
+        "collection": true
+      }
+    },
+    "57eaaa1c-0c24-42d7-8c64-5c8d3abbfc44": {
+      "_id": "57eaaa1c-0c24-42d7-8c64-5c8d3abbfc44",
+      "lockAction": "LOCK",
+      "_type": {
+        "_id": "AccountLockoutNode",
+        "name": "Account Lockout",
+        "collection": true
+      }
+    },
+    "655e1e0f-09c6-4e18-b15d-84667a01f47a": {
+      "_id": "655e1e0f-09c6-4e18-b15d-84667a01f47a",
+      "successUrl": "https://www.gov.uk/government/organisations/department-for-work-pensions",
+      "_type": {
+        "_id": "SetSuccessUrlNode",
+        "name": "Success URL",
+        "collection": true
+      }
+    },
+    "6d6446b2-e9fb-4946-8834-42594594d06b": {
+      "_id": "6d6446b2-e9fb-4946-8834-42594594d06b",
+      "tree": "Check phone and employee number are set",
+      "_type": {
+        "_id": "InnerTreeEvaluatorNode",
+        "name": "Inner Tree Evaluator",
+        "collection": true
+      }
+    },
+    "889abebe-d7c3-4038-bb1c-ff0a1c3b7ce9": {
+      "_id": "889abebe-d7c3-4038-bb1c-ff0a1c3b7ce9",
+      "outcomes": [
+        "DWP",
+        "Other"
+      ],
+      "script": "5dd2fc68-5109-40ea-92fb-717f5bab62d7",
+      "_type": {
+        "_id": "ScriptedDecisionNode",
+        "name": "Scripted Decision",
+        "collection": true
+      }
+    },
+    "afc29ffe-1b58-4886-b8db-38b207d92eef": {
+      "_id": "afc29ffe-1b58-4886-b8db-38b207d92eef",
+      "tree": "Login",
+      "_type": {
+        "_id": "InnerTreeEvaluatorNode",
+        "name": "Inner Tree Evaluator",
+        "collection": true
+      }
+    },
+    "cf477e63-1e4e-483d-8ff3-1473a0d13a93": {
+      "_id": "cf477e63-1e4e-483d-8ff3-1473a0d13a93",
+      "tree": "Email and validate OTP",
+      "_type": {
+        "_id": "InnerTreeEvaluatorNode",
+        "name": "Inner Tree Evaluator",
+        "collection": true
+      }
+    },
+    "e84f091a-26bb-4a1a-89d5-0b3ce424f902": {
+      "_id": "e84f091a-26bb-4a1a-89d5-0b3ce424f902",
+      "SharedStateAttribute": "helpdesk",
+      "UseSharedState": false,
+      "FailureMessage": "Please contact the helpdesk",
+      "_type": {
+        "_id": "FailureMessageAuthNode",
+        "name": "Failure Message Node",
+        "collection": true
+      }
+    }
+  },
+  "scripts": {
+    "5dd2fc68-5109-40ea-92fb-717f5bab62d7": {
+      "_id": "5dd2fc68-5109-40ea-92fb-717f5bab62d7",
+      "name": "Check address",
+      "description": "Checks if user address matches 'DWP'",
+      "script": "LyoKICAtIERhdGEgbWFkZSBhdmFpbGFibGUgYnkgbm9kZXMgdGhhdCBoYXZlIGFscmVhZHkgZXhlY3V0ZWQgYXJlIGF2YWlsYWJsZSBpbiB0aGUgc2hhcmVkU3RhdGUgdmFyaWFibGUuCiAgLSBUaGUgc2NyaXB0IHNob3VsZCBzZXQgb3V0Y29tZSB0byBlaXRoZXIgInRydWUiIG9yICJmYWxzZSIuCiAqLwoKdmFyIGFkZHJlc3MgPSBzaGFyZWRTdGF0ZS5nZXQoJ2FkZHJlc3MnKTsKCmlmIChhZGRyZXNzID09ICdEV1AnKSB7CiAgb3V0Y29tZSA9ICdEV1AnOwp9IGVsc2UgewogIG91dGNvbWUgPSAnT3RoZXInOwp9",
+      "default": false,
+      "language": "JAVASCRIPT",
+      "context": "AUTHENTICATION_TREE_DECISION_NODE",
+      "createdBy": "null",
+      "creationDate": 0,
+      "lastModifiedBy": "null",
+      "lastModifiedDate": 0
+    }
+  },
+  "tree": {
+    "_id": "Tutorial",
+    "nodes": {
+      "57eaaa1c-0c24-42d7-8c64-5c8d3abbfc44": {
+        "displayName": "Account Lockout",
+        "nodeType": "AccountLockoutNode",
+        "connections": {
+          "outcome": "e301438c-0bd0-429c-ab0c-66126501069a"
+        }
+      },
+      "889abebe-d7c3-4038-bb1c-ff0a1c3b7ce9": {
+        "displayName": "Check Address",
+        "nodeType": "ScriptedDecisionNode",
+        "connections": {
+          "DWP": "6d6446b2-e9fb-4946-8834-42594594d06b",
+          "Other": "655e1e0f-09c6-4e18-b15d-84667a01f47a"
+        }
+      },
+      "e84f091a-26bb-4a1a-89d5-0b3ce424f902": {
+        "displayName": "Contact HelpDesk",
+        "nodeType": "FailureMessageAuthNode",
+        "connections": {
+          "outcome": "57eaaa1c-0c24-42d7-8c64-5c8d3abbfc44"
+        }
+      },
+      "3ad8ad9e-d170-467d-b129-f82d85e1b639": {
+        "displayName": "Get address",
+        "nodeType": "GetProfilePropertyNode",
+        "connections": {
+          "outcome": "889abebe-d7c3-4038-bb1c-ff0a1c3b7ce9"
+        }
+      },
+      "655e1e0f-09c6-4e18-b15d-84667a01f47a": {
+        "displayName": "DWP website",
+        "nodeType": "SetSuccessUrlNode",
+        "connections": {
+          "outcome": "70e691a5-1e33-4ac3-a356-e7b6d60d92e0"
+        }
+      },
+      "6d6446b2-e9fb-4946-8834-42594594d06b": {
+        "displayName": "Check and set phone and employee number",
+        "nodeType": "InnerTreeEvaluatorNode",
+        "connections": {
+          "true": "70e691a5-1e33-4ac3-a356-e7b6d60d92e0",
+          "false": "70e691a5-1e33-4ac3-a356-e7b6d60d92e0"
+        }
+      },
+      "cf477e63-1e4e-483d-8ff3-1473a0d13a93": {
+        "displayName": "Email and validate OTP",
+        "nodeType": "InnerTreeEvaluatorNode",
+        "connections": {
+          "false": "e84f091a-26bb-4a1a-89d5-0b3ce424f902",
+          "true": "3ad8ad9e-d170-467d-b129-f82d85e1b639"
+        }
+      },
+      "afc29ffe-1b58-4886-b8db-38b207d92eef": {
+        "displayName": "Login",
+        "nodeType": "InnerTreeEvaluatorNode",
+        "connections": {
+          "true": "cf477e63-1e4e-483d-8ff3-1473a0d13a93",
+          "false": "57eaaa1c-0c24-42d7-8c64-5c8d3abbfc44"
+        }
+      }
+    },
+    "entryNodeId": "afc29ffe-1b58-4886-b8db-38b207d92eef"
+  }
+}
